@@ -1,30 +1,26 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "CERRAM META",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "dark": "/logo/logo.png",
+    "light": "/logo/logo.png"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.png",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "primary": "#cea276",
+    "light": "#c1966b",
+    "dark": "#cea276",
     "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
+      "from": "#cea276",
+      "to": "#c1966b"
     }
   },
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:info.cerrammeta@gmail.com"
     }
   ],
-  "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
-  },
   "tabs": [
     {
       "name": "API Reference",
@@ -33,19 +29,19 @@
   ],
   "anchors": [
     {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
-    },
-    {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
+      "name": "Academy",
+      "icon": "graduation-cap",
+      "url": "https://academy.crmclick.io"
     },
     {
       "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
+      "icon": "medium",
+      "url": "https://medium.com/@cerram_meta"
+    },
+    {
+      "name": "Help Center",
+      "icon": "seal-question",
+      "url": "https://crmclickcs.zendesk.com/hc/en-001"
     }
   ],
   "navigation": [
@@ -55,17 +51,6 @@
         "introduction",
         "quickstart",
         "development"
-      ]
-    },
-    {
-      "group": "Essentials",
-      "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
       ]
     },
     {
@@ -84,8 +69,13 @@
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "website": "https://www.crmclick.io",
+    "x": "https://twitter.com/Cerram_Meta",
+    "instagram": "https://www.instagram.com/cerram_meta",
+    "facebook": "https://www.facebook.com/cerrammeta",
+    "discord": "https://discord.gg/bUchBQxYWa",
+    "medium": "https://medium.com/@cerram_meta",
+    "youtube": "https://www.youtube.com/@Cerram_Meta",
+    "telegram": "https://t.me/cerram_meta"
   }
 }
