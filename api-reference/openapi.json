@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "http://api.crmclick.io"
+      "url": "https://cgk-api.crmclick.io"
     }
   ],
   "security": [
@@ -128,6 +128,203 @@
           }
         }
       }
+    },
+    "/spot/tickers": {
+      "get": {
+        "description": "Returns the latest tickers for all supported pairs",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Spot tickers response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ApiSpot"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/spot/orderbook": {
+      "get": {
+        "description": "Returns the current order book of a specific pair.",
+        "parameters": [
+          {
+            "name": "ticker_id",
+            "in": "query",
+            "required": true,
+            "description": "The trading symbol of this object, e.g. BTC_USDT, ETH_USDT",
+            "schema": {
+              "type": "string",
+              "default": "BTC_USDT"
+            }
+          },
+          {
+            "name": "depth",
+            "in": "query",
+            "required": true,
+            "description": "The maximum number of results to return",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Spot order book response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "ticker_id",
+                    "bids",
+                    "asks"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "ticker_id": {
+                      "description": "The trading symbol of this object, e.g. BTC_USDT, ETH_USDT",
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "description": "Timestamp",
+                      "type": "number"
+                    },
+                    "bids": {
+                      "description": "The current all bids in format [price, size]",
+                      "type": "array"
+                    },
+                    "asks": {
+                      "description": "The current all asks in format [price, size]",
+                      "type": "array"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/perpetual/contracts": {
+      "get": {
+        "description": "Returns the latest tickers for all supported pairs",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Perpetual tickers response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ApiSpot"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/perpetual/orderbook": {
+      "get": {
+        "description": "Returns the current order book of a specific pair.",
+        "parameters": [
+          {
+            "name": "ticker_id",
+            "in": "query",
+            "required": true,
+            "description": "The trading symbol of this object, e.g. BTC_USDT, ETH_USDT",
+            "schema": {
+              "type": "string",
+              "default": "BTC_USDT"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Perpetual order book response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "ticker_id",
+                    "bids",
+                    "asks"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "ticker_id": {
+                      "description": "The trading symbol of this object, e.g. BTC_USDT, ETH_USDT",
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "description": "Timestamp",
+                      "type": "number"
+                    },
+                    "bids": {
+                      "description": "The current all bids in format [price, size]",
+                      "type": "array"
+                    },
+                    "asks": {
+                      "description": "The current all asks in format [price, size]",
+                      "type": "array"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -180,6 +377,33 @@
             "format": "int32"
           },
           "message": {
+            "type": "string"
+          }
+        }
+      },
+      "ApiSpot": {
+        "required": [
+          "ticker_id"
+        ],
+        "type": "object",
+        "properties": {
+          "ticker_id": {
+            "description": "The trading symbol of this object, e.g. BTC_USDT, ETH_USDT",
+            "type": "string"
+          },
+          "last_price": {
+            "description": "The latest price",
+            "type": "number"
+          }
+        }
+      },
+      "ApiError": {
+        "required": [
+          "error"
+        ],
+        "type": "object",
+        "properties": {
+          "error": {
             "type": "string"
           }
         }

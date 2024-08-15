@@ -62,9 +62,10 @@
     {
       "group": "Endpoint Examples",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/endpoint/get_spot_tickers",
+        "api-reference/endpoint/get_spot_order_book",
+        "api-reference/endpoint/get_perpetual_contracts",
+        "api-reference/endpoint/get_perpetual_order_book"
       ]
     }
   ],
