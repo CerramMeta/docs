@@ -233,6 +233,81 @@
         }
       }
     },
+    "/spot/historical": {
+      "get": {
+        "description": "Returns the latest trade with its price, volume, and direction.",
+        "parameters": [
+          {
+            "name": "ticker_id",
+            "in": "query",
+            "required": true,
+            "description": "The trading symbol of this object, e.g. BTC_USDT, ETH_USDT",
+            "schema": {
+              "type": "string",
+              "default": "BTC_USDT"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "description": "The maximum number of results to return",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Spot trade historical response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "trade_id",
+                      "ticker_id"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "ticker_id": {
+                        "description": "The trading symbol of this object, e.g. BTC_USDT, ETH_USDT",
+                        "type": "string"
+                      },
+                      "trade_id": {
+                        "description": "Trade id",
+                        "type": "number"
+                      },
+                      "price": {
+                        "description": "Trade price",
+                        "type": "number"
+                      },
+                      "type": {
+                        "description": "Trade direction",
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/perpetual/contracts": {
       "get": {
         "description": "Returns the latest tickers for all supported pairs",
