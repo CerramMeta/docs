@@ -1,0 +1,129 @@
+Base URL:
+https://cgk-api.crmclick.io
+
+This API provides spot and perpetual market data
+Spot API
+GET /spot/tickers
+Description:
+Get all available spot trading pairs with their latest market data.
+
+Example request:
+GET https://cgk-api.crmclick.io/spot/tickers
+Response example:
+{
+  "tickers": [
+    {
+      "ticker_id": "BTC_USDT",
+      "base_currency": "BTC",
+      "target_currency": "USDT",
+      "last_price": "63500.00",
+      "base_volume": "123.45",
+      "target_volume": "7820000.00",
+      "bid": "63450.00",
+      "ask": "63550.00",
+      "high": "64000.00",
+      "low": "62000.00"
+    }
+  ]
+}
+
+GET /spot/orderbook
+Description:
+Get the order book for a specific trading pair.
+
+Query parameters:
+
+| Name        | Type    | Required | Description                              |
+| ----------- | ------- | -------- | ---------------------------------------- |
+| `ticker_id` | string  | ✅        | Trading pair ID, e.g. `BTC_USDT`         |
+| `depth`     | integer | ❌        | Number of levels to return (default: 20) |
+Response example:
+{
+  "timestamp": 1622547800000,
+  "bids": [
+    ["63450.00", "1.5"],
+    ["63400.00", "2.0"]
+  ],
+  "asks": [
+    ["63550.00", "1.2"],
+    ["63600.00", "3.1"]
+  ]
+}
+GET /spot/historical
+Description:
+Get historical trades (or market snapshots, depending on API implementation).
+
+Query parameters:
+| Name        | Type    | Required | Description                                |
+| ----------- | ------- | -------- | ------------------------------------------ |
+| `ticker_id` | string  | ✅        | Trading pair ID, e.g. `BTC_USDT`           |
+| `limit`     | integer | ❌        | Number of records to return (default: 100) |
+Example request:
+GET https://cgk-api.crmclick.io/spot/historical?ticker_id=BTC_USDT&limit=100
+Response example:
+{
+  "historical": [
+    {
+      "price": "63500.00",
+      "base_volume": "0.5",
+      "target_volume": "31750.00",
+      "trade_timestamp": 1622547800000,
+      "side": "buy"
+    },
+    {
+      "price": "63480.00",
+      "base_volume": "0.8",
+      "target_volume": "50784.00",
+      "trade_timestamp": 1622547795000,
+      "side": "sell"
+    }
+  ]
+}
+ Perpetual API
+GET /perpetual/contracts
+Description:
+Get all available perpetual contract info.
+
+Example request:
+GET https://cgk-api.crmclick.io/perpetual/contracts
+Response example:
+{
+  "contracts": [
+    {
+      "symbol": "BTC_USDT_PERP",
+      "price_precision": 2,
+      "quantity_precision": 3,
+      "min_quantity": "0.001",
+      "max_quantity": "100.000",
+      "min_notional": "5.00"
+    }
+  ]
+}
+GET /perpetual/orderbook
+Description:
+Get the order book for a specific perpetual contract.
+
+Query parameters:
+| Name        | Type   | Required | Description                  |
+| ----------- | ------ | -------- | ---------------------------- |
+| `ticker_id` | string | ✅        | Contract ID, e.g. `BTC_USDT` |
+Example request:
+GET https://cgk-api.crmclick.io/perpetual/orderbook?ticker_id=BTC_USDT
+Response example:
+{
+  "timestamp": 1622547800000,
+  "bids": [
+    ["63400.00", "10"],
+    ["63350.00", "15"]
+  ],
+  "asks": [
+    ["63500.00", "8"],
+    ["63600.00", "12"]
+  ]
+}
+⚠️ Notes
+All prices and quantities are represented as strings to preserve precision.
+
+Timestamps are in milliseconds since epoch (Unix time).
+
+Please apply appropriate rate limiting to avoid throttling.
